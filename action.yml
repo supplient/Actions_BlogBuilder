@@ -1,0 +1,15 @@
+name: "Blog Builder"
+description: "Build Blog from markdowns"
+inputs:
+  markdown_dir:
+    description: "Path to the directory containing .md files"
+    required: true
+  html_dir:
+    description: "Path to the directory to contain .html files"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.markdown_dir }}
+    - ${{ inputs.html_dir }}
