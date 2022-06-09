@@ -1,7 +1,12 @@
-md_dir=$1
-html_dir=$2
-title=$3
-css_file=$4
+md_dir="$1"
+html_dir="$2"
+title="$3"
+css_file="$4"
+
+echo "title: ${title}"
+echo "css_file: ${css_file}"
+echo "md_dir: ${md_dir}"
+echo "html_dir: ${html_dir}"
 
 # 创建输出目录以免不存在，-R是为了在目录已存在时也不会报错
 mkdir -p $html_dir
@@ -15,5 +20,5 @@ echo "Generating index.md ......"
 sh /make_index.sh ${md_dir}
 
 # markdown=>html
-echo "Converting markdown to html: ./md =>./html ......"
+echo "Converting markdown to html: ${md_dir} => ${html_dir} ......"
 sh /convert.sh -t ${title} -c ${css_file} ${md_dir} ${html_dir}
