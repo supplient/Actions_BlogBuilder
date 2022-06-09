@@ -7,9 +7,19 @@ inputs:
   html_dir:
     description: "Path to the directory to contain .html files"
     required: true
+  title:
+    description: "Will be the blog's title"
+    required: false
+    default: "My Blog"
+  css_file:
+    description: "Th url pointing to the css file used"
+    required: false
+    default: "https://gist.githubusercontent.com/supplient/1726b3acbfed278f54b66cf11129a43b/raw/62b874d98f72005d18b9b2a05d3be6815959b51b/gh-pandoc.css"
 runs:
   using: "docker"
   image: "Dockerfile"
   args:
     - ${{ inputs.markdown_dir }}
     - ${{ inputs.html_dir }}
+    - ${{ inputs.title }}
+    - ${{ inputs.css_file }}

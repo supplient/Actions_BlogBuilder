@@ -1,12 +1,25 @@
-# usage: bash convert.sh
+# usage: bash convert.sh [-t title] [-c css_file_url] md_dir html_dir
 # 本文件封装了markdown=>html的转换过程
-# 执行后会遍历./md中的所有.md文件，利用pandoc转换为html文件，并输出到./html中。
-# ./html下的目录结构会与./md保持一致，不存在的目录则会被新建。
+# 执行后会遍历md_dir中的所有.md文件，利用pandoc转换为html文件，并输出到html_dir中。
+# html_dir下的目录结构会与md_dir保持一致，不存在的目录则会被新建。
 
-src_root=$1
-dst_root=$2
+
+# 处理输出选项
 title="My Blog"
 css_file="https://gist.githubusercontent.com/supplient/1726b3acbfed278f54b66cf11129a43b/raw/62b874d98f72005d18b9b2a05d3be6815959b51b/gh-pandoc.css"
+while getopts "t:c:" OPT
+do
+	case "$OPT" in
+	t)	title="$OPTARG";;
+	c)	css_file="$OPTARG";;
+	[?]) echo "Usage: $0 [-t title] [-c css_file] markdown_dir html_dir"
+		echo "	-t: default \"My Blog\""
+		echo "	-c: default \"https://gist.githubusercontent.com/supplient/1726b3acbfed278f54b66cf11129a43b/raw/62b874d98f72005d18b9b2a05d3be6815959b51b/gh-pandoc.css\""
+		exit 1;;
+	esac
+done
+src_root=${@:$OPTIND:1} # markdown dir
+dst_root=${@:$OPTIND+1:1} # html dir
 
 # 遍历所有.md文件
 # TODO: If there is space in the filename, for-loop will separete the filename
