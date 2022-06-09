@@ -1,3 +1,3 @@
 FROM pandoc/latex
-COPY ./*.sh /data
+COPY ./*.sh /data/
 ENTRYPOINT ["sh", "./work.sh"]
