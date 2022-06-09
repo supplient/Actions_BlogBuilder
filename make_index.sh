@@ -23,7 +23,7 @@ do
 		echo "[${dirname}](${dirname}/index.html)" >> $indexpath
 		echo "" >> $indexpath
 		# 对子目录进行递归操作
-		sh ./$0 ${filepath}
+		sh $0 ${filepath}
 	elif [[ ${filepath##*.} == "md" && ${filepath##*/} != "index.md" ]]
 	then
 		# 对每个非index.md的.md文件建立 到其对应的html文件 的索引项

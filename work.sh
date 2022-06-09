@@ -12,8 +12,8 @@ cp -R "${md_dir}/*" ${html_dir}
 
 # 生成目录文件
 echo "Generating index.md ......"
-sh ./make_index.sh ${md_dir}
+sh /make_index.sh ${md_dir}
 
 # markdown=>html
 echo "Converting markdown to html: ./md =>./html ......"
-sh ./convert.sh -t ${title} -c ${css_file} ${md_dir} ${html_dir}
+sh /convert.sh -t ${title} -c ${css_file} ${md_dir} ${html_dir}
