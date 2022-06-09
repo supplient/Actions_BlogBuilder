@@ -1,3 +1,3 @@
 FROM pandoc/latex
-COPY ./*.sh /data/
+COPY ./*.sh ${GITHUB_WORKSPACE}
 ENTRYPOINT ["sh", "./work.sh"]
