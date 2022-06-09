@@ -13,7 +13,7 @@ mkdir -p $html_dir
 
 # 拷贝资源文件 # TODO: .md文件其实可以不用拷贝
 echo "Copying files ......"
-cp -R "${md_dir}/*" ${html_dir}
+cp -R ${md_dir}/* ${html_dir}
 
 # 生成目录文件
 echo "Generating index.md ......"
