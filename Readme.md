@@ -24,4 +24,78 @@
 ```
 
 # Scenarios
-TODO
+假设有一个markdown的库，我们希望从它建立一个博客。假设它的目录结构为：
+
+```
+a.md
+graph
+  b.md
+  bg.png
+extra
+  c.md
+  cg.html
+```
+
+为其设立Workflow，其`main.yml`如下：
+
+``` yaml
+name: Build Page => gh_pages
+
+# 设定为当main分支有新分支时被启动
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # 只能在linux系统的host runner上跑
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build temporary directory
+        run: mkdir -p "${{ github.workspace }}/md"
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: "${{ github.workspace }}/md"
+
+      - name: Blog Builder
+        uses: supplient/Actions_BlogBuilder@main
+        with:
+          markdown_dir: "/github/workspace/md"
+          html_dir: "/github/workspace/html"
+          title: "测试用博客"
+        
+      - name: Deploy to gp-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: "${{ github.workspace }}/html"
+```
+
+则每当main分支有新的commit被提交时，该workflow就会在gh-pages分支下生成对应的html文件。gh-pages分支下的目录结构将为：
+
+```
+index.md
+a.html
+a.md
+graph
+  index.md
+  b.html
+  b.md
+  bg.png
+extra
+  index.md
+  c.html
+  c.md
+  cg.html
+```
+
+如果启用github page，并将其源目录设为gh-page分支的根目录，则会因为gh-pages的变动而进一步触发github自动设立的pages-build-depolyment Workflow，从而更新github page。
+
+
+# Limitations
+* 目前不支持文件名里带空格
