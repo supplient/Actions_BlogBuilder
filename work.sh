@@ -21,4 +21,4 @@ sh /make_index.sh ${md_dir}
 
 # markdown=>html
 echo "Converting markdown to html: ${md_dir} => ${html_dir} ......"
-sh /convert.sh ${md_dir} ${html_dir} -t ${title} -c ${css_file}
+sh /convert.sh ${md_dir} ${html_dir} ${title} ${css_file}
