@@ -21,6 +21,12 @@ done
 src_root=${@:$OPTIND:1} # markdown dir
 dst_root=${@:$OPTIND+1:1} # html dir
 
+# Log
+echo "title: ${title}"
+echo "css_file: ${css_file}"
+echo "md_dir: ${src_root}"
+echo "html_dir: ${dst_root}"
+
 # 遍历所有.md文件
 # TODO: If there is space in the filename, for-loop will separete the filename
 files=`find "${src_root}" -name "*.md"`
