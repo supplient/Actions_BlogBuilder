@@ -16,8 +16,9 @@
 
 结果：会递归地给每个目录都生成一个形似下文的index.md。
 
-* 遍历到.md文件时，生成到.html的条目
-* 遍历到子目录时，生成到子目录的index.html的条目
+* 对于子目录，建立一个到子目录的index.md的索引项
+* 对于.md文件，建立一个到它对应的html文件的索引项
+* 对于.pdf文件，建立一个到它自己的索引项
 
 ``` markdown
 [并行问题_offset2index.html](并行问题_offset2index.html)
@@ -27,6 +28,8 @@
 [CUDA中原子锁的实现.html](CUDA中原子锁的实现.html)
 
 [GPU数据结构设计模式.html](GPU数据结构设计模式.html)
+
+[Derivation.pdf](Derivation.pdf)
 
 [PD_reading](PD_reading/index.html)
 

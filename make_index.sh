@@ -1,11 +1,15 @@
 # usage: bash make_index.sh ./md
-# 它会递归遍历目录，为每个目录都创建一个index.md
+# 它会递归遍历目录，为每个目录都创建一个index.md作为该目录的索引：
+#	* 对于子目录，建立一个到子目录的index.md的索引项
+#	* 对于.md文件，建立一个到它对应的html文件的索引项
+#	* 对于.pdf文件，建立一个到它自己的索引项
 # (index.md) e.g.
 # 
 # [并行问题_offset2index.html](并行问题_offset2index.html)
 # [C++检查模板参数的成员函数是否具有指定签名.html](C++检查模板参数的成员函数是否具有指定签名.html)
 # [CUDA中原子锁的实现.html](CUDA中原子锁的实现.html)
 # [GPU数据结构设计模式.html](GPU数据结构设计模式.html)
+# [Derivation.pdf](Derivation.pdf)
 # [PD_reading](PD_reading/index.html)
 # [XPBD_reading](XPBD_reading/index.html)
 
@@ -29,6 +33,13 @@ do
 		# 对每个非index.md的.md文件建立 到其对应的html文件 的索引项
 		filename=${filepath##*/}
 		filename="${filename%.*}.html"
+		echo "[${filename}]($filename)" >> $indexpath
+		echo "" >> $indexpath
+	fi
+	elif [[ ${filepath##*.} == "pdf" ]]
+	then
+		# 对每个.pdf文件建立 到它 的索引项
+		filename=${filepath##*/}
 		echo "[${filename}]($filename)" >> $indexpath
 		echo "" >> $indexpath
 	fi
