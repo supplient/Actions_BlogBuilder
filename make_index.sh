@@ -35,7 +35,6 @@ do
 		filename="${filename%.*}.html"
 		echo "[${filename}]($filename)" >> $indexpath
 		echo "" >> $indexpath
-	fi
 	elif [[ ${filepath##*.} == "pdf" ]]
 	then
 		# 对每个.pdf文件建立 到它 的索引项
