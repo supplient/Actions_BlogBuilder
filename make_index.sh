@@ -41,5 +41,11 @@ do
 		filename=${filepath##*/}
 		echo "[${filename}]($filename)" >> $indexpath
 		echo "" >> $indexpath
+	elif [[ ${filepath##*.} == "html" ]]
+	then
+		# 对每个.html文件建立 到它 的索引项
+		filename=${filepath##*/}
+		echo "[${filename}]($filename)" >> $indexpath
+		echo "" >> $indexpath
 	fi
 done
